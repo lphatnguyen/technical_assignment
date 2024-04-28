@@ -27,7 +27,7 @@ To use any trained model for inference of any image, take the following command 
 
 The repository also contains two bash scripts that run the experiments made. The ```train.sh``` file reproduces the training of all models and picks the best weights for all the trained models whithin 50 epochs. The ```test.sh``` provides the experimental results shown in the report. 
 - To run training: ```./train.sh``` or ```nohup ./test.sh > training_logs.txt &``` to save training logs to a file.
-- To run training: ```./test.sh``` or ```nohup ./test.sh > training_logs.txt &``` to save testing logs to a file.
+- To run testing: ```./test.sh``` or ```nohup ./test.sh > testing_logs.txt &``` to save testing logs to a file.
 
 ## Architecture visualisations
 Due to space and visualability of the architectures, I decide not to include theirs architecture inside the report. Hence, I show them here in the repository where we have more space and the view is also better.
