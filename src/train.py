@@ -1,17 +1,13 @@
 import torch
 import torch.optim as optim
-import torch.utils
 import torchvision
-import cv2
-import time
 import os
 from datasets.FerPlusDataset import FerPlusDataset, FerSingleLabel
 from models.lenet import LeNet
 from models.resnet import resnet18, resnet34
 from models.mobilenet_v2 import mobilenet_v2
 import argparse
-from sklearn.metrics import accuracy_score, classification_report, ConfusionMatrixDisplay, confusion_matrix, multilabel_confusion_matrix
-from matplotlib import pyplot as plt
+from sklearn.metrics import accuracy_score
 
 # Defining arguments for inputs
 parser = argparse.ArgumentParser()
@@ -33,6 +29,7 @@ if args.is_ferplus:
 else:
     print("FER dataset is used")
     classes = ['surprise', 'fear', 'angry', 'neutral', 'sad', 'disgust', 'happy']
+
 if not os.path.exists("results/"):
     os.makedirs("results/")
 save_path = "results/"
@@ -193,20 +190,6 @@ def train_single_label(args):
                                  optimizer = optimizer,
                                  criterion = criterion,
                                  epochs = args.epochs)
-    
-    best_model_weights = torch.load("{}/{}.pth".format(save_path, args.saving_fn))
-    model.load_state_dict(best_model_weights)
-    print("Getting private test value")
-    test_loss = []
-    gt, psp = test(model = model,
-                   data_loader = test_loader,
-                   criterion =criterion)
-    print(classification_report(gt, psp, target_names=classes))
-    conf_mat = confusion_matrix(gt, psp)
-    print(conf_mat)
-    disp = ConfusionMatrixDisplay(conf_mat, display_labels=classes)
-    disp.plot()
-    plt.savefig("confmat_{}.pdf".format(args.saving_fn))
 
 if args.is_ferplus:
     train_multi_label(args=args)
