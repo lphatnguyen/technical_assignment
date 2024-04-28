@@ -1,6 +1,10 @@
 # Facial emotion recognition - Technical task
 ## Introduction
 This Github repository contains the executable codes for facial recognition using FER and FER+ dataset. 
+
+## Pretrained models
+In the Github repository, pretrained weights of LeNet, ResNet 18, ResNet 34 and MobileNet v2 for FER and FER+ dataset. For models train on FER dataset, model filenames are end with ```_single.pth```. While trained models on FER+ dataset ends with ```_multi.pth```.
+
 ## Requirements
 Please install the folloing packages for in order to run the codes. The packages are found in the requirements.txt. Please to install the package, just simply run:
 
@@ -21,6 +25,9 @@ To use any trained model for inference of any image, take the following command 
 
 ```python src/infere.py --image_fn path/to/image --saving_fn best_weights_resnet34_single --is_ferplus 0 --model resnet34```
 
+The repository also contains two bash scripts that run the experiments made. The ```train.sh``` file reproduces the training of all models and picks the best weights for all the trained models whithin 50 epochs. The ```test.sh``` provides the experimental results shown in the report. 
+- To run training: ```./train.sh``` or ```nohup ./test.sh > training_logs.txt &``` to save training logs to a file.
+- To run training: ```./test.sh``` or ```nohup ./test.sh > training_logs.txt &``` to save testing logs to a file.
 
 ## Architecture visualisations
 Due to space and visualability of the architectures, I decide not to include theirs architecture inside the report. Hence, I show them here in the repository where we have more space and the view is also better.
